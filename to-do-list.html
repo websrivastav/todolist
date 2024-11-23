@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button{cursor: pointer;}
+        .todoforms{
+            max-width: 50%;
+            margin: 0 auto;
+            box-shadow: 0 0 10px #d4d4d4;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+        .todoforms h3{
+            text-align: center;
+            background: #b23813;
+            color: #fff;
+            padding: 5px;
+            margin: 0;
+        }
+        .todoforms .inner{
+padding: 30px;
+        }
+        #myForm input{
+            width: 75%;
+            height: 35px;
+            padding: 0 10px;
+        }
+        #myForm button{
+            width: 19%;
+            height: 38px;
+        }
+        #myItem button{
+            float: right;
+    background: red;
+    color: #fff;
+    border: 0;
+        }
+        #myItem{padding: 0;}
+        #myItem li {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+    </style>
+</head>
+<body>
+    
+<div class="todoforms">
+    <h3>Add your To Do List here</h3>
+    <div class="inner">
+    <form id="myForm">
+        <input id="myInput" type="text" placeholder="Enter your task">
+        <button type="submit">Add</button>
+    </form>
+    <div id="list">
+    <h4>To Do List</h4>
+    <ul id="myItem"></ul>
+</div>
+</div>
+</div>
+    <script>
+      // Get references to the form, input, and list elements
+var myForm = document.getElementById("myForm");
+var myInput = document.getElementById("myInput");
+var myItem = document.getElementById("myItem");
+// Add event listener to the form
+myForm.addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent form submission
+    if (myInput.value.trim() !== "") {
+        createItem(myInput.value); // Add item to the list
+        myInput.value = ""; // Clear the input field
+        myInput.focus(); // Focus back to the input field
+    } else {
+        alert("Please enter a task!"); // Alert if input is empty
+    }
+});
+
+// Function to create a new to-do item
+function createItem(inputItems) {
+    
+    // Create a new <li> element for the to-do item
+    var li = document.createElement("li");
+    li.textContent = inputItems; // Set the text of the item
+
+    // Create a "Delete" button
+    var deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.onclick = function() {
+        deleteElement(li); // Delete the <li> when button is clicked
+    };
+
+    // Append the delete button to the <li>
+    li.appendChild(deleteBtn);
+
+    // Append the <li> to the list
+    myItem.appendChild(li);
+}
+
+// Function to delete a to-do item
+function deleteElement(itemToDelete) {
+    itemToDelete.remove(); // Remove the item from the list
+}
+
+    </script>
+</body>
+</html>
